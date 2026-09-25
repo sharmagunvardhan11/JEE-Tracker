@@ -1,6 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="110" fill="#0b1220"/>
-<circle cx="256" cy="256" r="170" fill="#16233a" stroke="#67e8a5" stroke-width="20"/>
-<path d="M256 125v131l92 70" fill="none" stroke="#67e8a5" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="256" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="62" font-weight="800" fill="#f3f7ff">JEE</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="42" fill="#58cc02"/><path d="M96 32c18 24 48 40 48 79 0 29-21 49-48 49s-48-20-48-49c0-23 13-42 32-57-1 19 8 28 18 35 5-22 5-39-2-57z" fill="#fff"/><circle cx="96" cy="118" r="13" fill="#ffc800"/></svg>

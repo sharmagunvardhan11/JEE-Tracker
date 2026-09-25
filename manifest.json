@@ -1,11 +1,10 @@
 {
-  "name": "JEE Consistency Tracker",
-  "short_name": "JEE Tracker",
+  "name": "JEE Focus \u2014 Consistency Quest",
+  "short_name": "JEE Focus",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b1220",
-  "theme_color": "#0b1220",
-  "description": "A local JEE study consistency tracker with daily targets, timer, streaks and reminders.",
+  "theme_color": "#58cc02",
+  "background_color": "#f7fbff",
   "icons": [
     {
       "src": "icon.svg",
