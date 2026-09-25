@@ -1,237 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html><html lang='en'><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b1220">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <title>JEE Focus — Consistency Quest</title>
+
+
 <style>
-:root{
-  --bg:#0b1220; --card:#111b2e; --card2:#16233a; --text:#f3f7ff;
-  --muted:#9fb0c9; --accent:#67e8a5; --accent2:#60a5fa; --warn:#fbbf24;
-  --danger:#fb7185; --line:#24334d;
-}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#172743 0,#0b1220 45%);color:var(--text);
-font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-.container{max-width:1050px;margin:auto;padding:22px}
-header{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}
-h1{font-size:clamp(25px,5vw,40px);margin:0}
-.subtitle{color:var(--muted);margin-top:6px}
-.badge{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:#0f192b;color:var(--accent);font-weight:700}
-.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
-.card{background:rgba(17,27,46,.92);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 10px 35px #0003}
-.hero{grid-column:1/-1}
-.mode{display:flex;gap:10px;margin-bottom:15px}
-.mode button,.btn{border:1px solid var(--line);background:var(--card2);color:var(--text);padding:11px 14px;border-radius:12px;cursor:pointer;font-weight:700}
-.mode button.active{background:var(--accent);color:#062114;border-color:transparent}
-.target{font-size:42px;font-weight:850;letter-spacing:-1px}
-.small{color:var(--muted);font-size:14px}
-.progress{height:18px;background:#0a1020;border-radius:99px;overflow:hidden;margin:16px 0 9px;border:1px solid var(--line)}
-.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .3s}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.stat{background:#0d1728;border:1px solid var(--line);border-radius:14px;padding:14px}
-.stat strong{display:block;font-size:24px;margin-top:3px}
-.timer{font-size:54px;font-variant-numeric:tabular-nums;text-align:center;font-weight:800;margin:8px 0}
-.timerBtns{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.session-inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-input,select{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#0c1526;color:var(--text);font-size:15px}
-.primary{background:var(--accent);color:#062114;border:0}
-.danger{background:#3a1520;border-color:#673040;color:#ffb4c0}
-.full{width:100%}
-.session-list{max-height:330px;overflow:auto;margin-top:10px}
-.session{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
-.session:last-child{border-bottom:0}
-.session b{display:block}
-.notice{padding:12px;border-radius:12px;background:#0d1728;border:1px solid var(--line);color:var(--muted);margin-top:12px}
-.success{color:var(--accent)}
-.warn{color:var(--warn)}
-.dangerText{color:var(--danger)}
-footer{color:var(--muted);text-align:center;font-size:12px;padding:20px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.hero{grid-column:auto}}
+:root{--bg:#f5f9ff;--card:#fff;--text:#172033;--muted:#667085;--line:#e5eaf2;--accent:#58cc02;--accent2:#2d9cdb;--danger:#e5484d;--shadow:0 10px 30px rgba(24,39,75,.08)}
+:root[data-theme=dark]{--bg:#10151d;--card:#171e28;--text:#f2f5f8;--muted:#a9b3c0;--line:#293443;--shadow:0 10px 30px rgba(0,0,0,.25)}
+@media(prefers-color-scheme:dark){:root[data-theme=system]{--bg:#10151d;--card:#171e28;--text:#f2f5f8;--muted:#a9b3c0;--line:#293443;--shadow:0 10px 30px rgba(0,0,0,.25)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app-shell{max-width:1100px;margin:auto;padding-bottom:90px}.topbar{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:5}.brand{display:flex;gap:10px;align-items:center}.brand-icon{font-size:25px}.brand strong{display:block;font-size:18px}.brand span{display:block;font-size:11px;color:var(--muted)}.top-date{text-align:right;font-size:12px;color:var(--muted)}.top-date b{display:block;color:var(--text);font-size:15px;margin-top:2px}.page{display:none;padding:26px 20px}.page.active{display:block}.hero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:20px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);margin:0 0 5px}.hero h1,.page-title h1{margin:0 0 6px;font-size:28px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.streak-pill{background:#fff2d8;color:#9b6200;padding:11px 15px;border-radius:999px;font-weight:800;white-space:nowrap}.home-grid,.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card,.mini-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px;margin-bottom:16px}.card-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-bottom:14px}.big-number{font-size:38px;font-weight:900;margin:8px 0 14px}.progress{height:12px;background:var(--line);border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .3s}.row{display:flex;justify-content:space-between;margin-top:9px;color:var(--muted);font-size:12px}.day-choice{display:flex;gap:10px;margin-top:18px}.choice,.theme-choice{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:12px;padding:10px;cursor:pointer;flex:1}.timer{text-align:center;font-size:48px;font-weight:900;letter-spacing:2px;margin:16px 0}.timer-actions,.buffer-buttons,.log-form{display:flex;gap:10px;flex-wrap:wrap}.primary,.secondary,.danger{border:0;border-radius:11px;padding:11px 16px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#102000}.secondary{background:var(--bg);color:var(--text);border:1px solid var(--line)}.danger{background:#ffe2e3;color:#a31d24}.center{text-align:center}.log-form input{flex:1;min-width:180px;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--text)}.home-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.mini-card{margin:0;text-align:center}.mini-card span{font-size:22px;display:block}.mini-card b{display:block;font-size:20px;margin:5px}.mini-card small,.stat small{color:var(--muted)}.page-title{margin-bottom:20px}.stats-grid .stat span{color:var(--muted);font-size:12px;font-weight:700}.stat strong{display:block;font-size:27px;margin:10px 0 3px}.week-view{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.week-day{padding:12px 5px;text-align:center;border-radius:12px;background:var(--bg);border:1px solid var(--line)}.week-day b{display:block;font-size:11px}.week-day span{display:block;margin:8px 0;font-size:20px}.badge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.badge{border:1px solid var(--line);border-radius:14px;padding:13px;text-align:center;background:var(--bg)}.badge b{display:block;margin-top:5px}.session-list{display:grid;gap:8px}.session-item{display:flex;justify-content:space-between;padding:11px;border-bottom:1px solid var(--line)}.buffer-status{padding:13px;border-radius:12px;background:var(--bg);margin-bottom:13px}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 0;border-bottom:1px solid var(--line)}.setting-row b,.setting-row small{display:block}.setting-row small{color:var(--muted);margin-top:4px}.setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.setting-grid label{font-weight:700;font-size:12px}.setting-grid select,.setting-row select{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.theme-choice{display:flex;flex-direction:column;gap:5px;text-align:left}.theme-choice.selected{outline:2px solid var(--accent)}.theme-choice small{color:var(--muted)}.current-theme{margin-top:14px;font-size:12px;color:var(--muted)}.danger-zone{border-color:#f2b5b8}.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(1100px,100%);height:72px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:10}.nav-item{border:0;background:transparent;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.nav-item span{font-size:21px}.nav-item small{font-weight:700}.nav-item.active{color:var(--accent)}@media(max-width:700px){.home-grid,.stats-grid{grid-template-columns:1fr}.home-mini-grid{grid-template-columns:repeat(2,1fr)}.hero{align-items:flex-start;flex-direction:column}.badge-grid{grid-template-columns:repeat(2,1fr)}.setting-grid,.theme-grid{grid-template-columns:1fr}.timer{font-size:39px}.topbar{padding:0 14px}.page{padding:20px 14px}}
+</style>
 
-.rewardBadge{padding:12px;border:1px solid #25334a;border-radius:14px;background:#0b1220}
-.rewardBadge b{display:block}.rewardBadge span{font-size:12px;color:#9aa9bf}
-.weekDot{text-align:center;padding:9px 3px;border:1px solid #25334a;border-radius:10px;background:#0b1220;font-size:12px}
-.weekDot.done{border-color:#2e815e;background:#0d271c;color:#65e6a4}.weekDot.today{outline:2px solid #66a8ff}
-
-/* JEE Focus v5 */
-:root{--accent:#58cc02;--accent2:#1cb0f6;--gold:#ffc800;--purple:#8b5cf6}
-body{background:linear-gradient(180deg,#f7fbff,#eef7ff 50%,#f7fff1);color:#18324b}
-.container{max-width:980px}
-header{background:#fff;border:2px solid #dceaf4;border-radius:22px;padding:16px 18px;box-shadow:0 5px 0 #d7e4ec}
-h1{color:#18324b}.subtitle,.small{color:#587187}
-.badge{background:#fff;border:2px solid #dceaf4;color:#1683c4}
-.card{background:#fff;border:2px solid #dceaf4;border-radius:22px;box-shadow:0 5px 0 #d7e4ec}
-.mode button,.btn{background:#f5faff;color:#18324b;border:2px solid #d5e5ef;box-shadow:0 3px 0 #d5e5ef}
-.mode button.active,.primary{background:var(--accent);color:#fff;border-color:#4caf00;box-shadow:0 3px 0 #4caf00}
-.progress{background:#e8f0f5;border:0;height:22px}.bar{background:linear-gradient(90deg,#1cb0f6,#58cc02)}
-.stat{background:#f7fbff;border:2px solid #dceaf4}
-.notice{background:#f5fbff;border:2px solid #dceaf4;color:#587187}
-.streak-flame{font-size:54px;display:inline-block;animation:flame 1.2s ease-in-out infinite}
-@keyframes flame{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.08)}}
-.rank-card{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.rank-box{padding:16px;border-radius:18px;background:#f8fbff;border:2px solid #dceaf4;text-align:center}
-.rank-number{font-size:40px;font-weight:900;color:#8b5cf6}
-.rank-delta{font-weight:800}.up{color:#2b9b00}.down{color:#d72e2e}
-.quest{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:#fffdf2;border:2px solid #ffe58a}
-.quest-icon{font-size:30px}.quest strong{display:block}
-.reminder-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.reminder-grid label{font-size:13px;color:#587187;font-weight:700}
-@media(max-width:760px){.rank-card,.reminder-grid{grid-template-columns:1fr}}
-
-
-.day-clock{font-variant-numeric:tabular-nums}
-.buffer-active{border-color:#8b5cf6!important;background:#faf7ff!important}
-
+<style>
+.setup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.setup-overlay.show{display:flex}.setup-modal{width:min(520px,100%);background:var(--card);color:var(--text);border-radius:24px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.25);text-align:center}.setup-icon{font-size:44px;margin-bottom:8px}.setup-modal h2{margin:4px 0 8px;font-size:26px}.setup-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.setup-options button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:16px;padding:18px 12px;cursor:pointer;display:flex;flex-direction:column;gap:6px;font-size:25px}.setup-options b{font-size:16px}.setup-options small{font-size:12px;color:var(--muted)}.setup-options button:hover{outline:2px solid var(--accent)}@media(max-width:600px){.setup-options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="container">
-<header>
-  <div>
-    <h1>JEE Focus</h1>
-    <div class="subtitle">Your daily quest: study, protect the streak, level up.</div>
+<div id="firstSetupOverlay" class="setup-overlay" aria-hidden="true">
+  <div class="setup-modal">
+    <div class="setup-icon">🎯</div>
+    <p class="eyebrow">WELCOME TO JEE FOCUS</p>
+    <h2>Choose your normal study day</h2>
+    <p class="muted">This question appears only once. Your choice sets your daily target.</p>
+    <div class="setup-options">
+      <button onclick="completeFirstSetup('school')">🏫<b>School Day</b><small>Daily target: 5h 50m</small></button>
+      <button onclick="completeFirstSetup('holiday')">☀️<b>Holiday</b><small>Daily target: 11h 20m</small></button>
+    </div>
   </div>
-  <div class="badge" id="dayLabel">Today</div>
-</header>
-
-<div class="grid">
-<section class="card hero">
-  <div class="mode">
-    <button id="schoolBtn" class="active" onclick="setMode('school')">🏫 School Day</button>
-    <button id="holidayBtn" onclick="setMode('holiday')">📚 Holiday</button>
-  </div>
-  <div class="small">Today's compulsory target</div>
-  <div class="target" id="targetText">5h 50m</div>
-  <div class="progress"><div class="bar" id="bar"></div></div>
-  <div style="display:flex;justify-content:space-between;gap:10px">
-    <span id="progressText">0h 00m studied</span>
-    <span id="remainingText">5h 50m remaining</span>
-  </div>
-  <div class="stats">
-    <div class="stat"><span class="small">Today's total</span><strong id="total">0h 00m</strong></div>
-    <div class="stat"><span class="small">Streak</span><strong id="streak">0 days</strong></div>
-    <div class="stat"><span class="small">Sessions</span><strong id="count">0</strong></div>
-  </div>
-  <div class="notice" id="status">Start a timer or log a completed session below.</div>
-</section>
-
-<section class="card">
-  <h2>⏱ Live study timer</h2>
-  <div class="small">You can stop, take a break, and resume. The completed time is added to today.</div>
-  <div class="timer" id="timer">00:00:00</div>
-  <div class="timerBtns">
-    <button class="btn primary" id="startBtn" onclick="toggleTimer()">Start</button>
-    <button class="btn" onclick="resetTimer()">Reset</button>
-  </div>
-</section>
-
-<section class="card">
-  <h2>➕ Log a study session</h2>
-  <div class="small" style="margin-bottom:12px">Use this when you studied separately and want to add that block.</div>
-  <div class="session-inputs">
-    <input id="hours" type="number" min="0" max="24" placeholder="Hours">
-    <input id="minutes" type="number" min="0" max="59" placeholder="Minutes">
-  </div>
-  <input id="subject" style="margin-top:10px" placeholder="Subject / chapter (optional)">
-  <button class="btn primary full" style="margin-top:10px" onclick="logManual()">Add session</button>
-</section>
-
-<section class="card">
-  <h2>🔔 Keep me accountable</h2>
-  <div class="small">Reminders work while this page is open. Allow browser notifications when prompted.</div>
-  <button class="btn full" style="margin-top:12px" onclick="enableNotifications()">Enable notifications</button>
-  <button class="btn full" style="margin-top:8px" onclick="installApp()" id="installBtn" hidden>📱 Install on Home Screen</button>
-  <div class="notice">The app checks your progress regularly and can remind you when you're behind your target. It never deletes your logged sessions automatically.</div>
-</section>
-
-<section class="card hero">
-  <h2>🏆 Consistency rewards</h2>
-  <div style="display:flex;justify-content:space-between;gap:12px">
-    <strong id="levelName">Level 1 · Starter</strong><span id="xpText" style="color:#ffd166">0 XP</span>
-  </div>
-  <div style="height:12px;background:#080d17;border-radius:99px;overflow:hidden;border:1px solid #25334a;margin:10px 0">
-    <div id="xpbar" style="height:100%;width:0;background:linear-gradient(90deg,#b49cff,#66a8ff)"></div>
-  </div>
-  <div class="small" id="xpNext">Study to earn XP and unlock badges.</div>
-  <div id="rewardBadges" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin-top:12px"></div>
-</section>
-<section class="card hero">
-  <h2>🔥 Consistency week</h2>
-  <div class="small">✓ means you reached that day's target.</div>
-  <div id="weekDots" style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px"></div>
-  <div class="notice" id="motivationText">One focused session is enough to start.</div>
-</section>
-
-
-<section class="card hero">
-<h2>🔥 Streak & Consistency Rank</h2>
-<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><span class="streak-flame">🔥</span><div><div style="font-size:28px;font-weight:900" id="streakBig">0 day streak</div><div class="small">Complete your daily mission to keep the flame alive.</div></div></div>
-<div class="rank-card">
-<div class="rank-box"><div class="small">Your Focus Rank</div><div class="rank-number" id="focusRank">#1000</div><div class="small">In-app consistency league</div></div>
-<div class="rank-box"><div class="small">Consistency Points</div><div class="rank-number" id="consistencyPoints">0</div><div id="rankChange" class="rank-delta">Start your first mission.</div></div>
-</div>
-<div class="notice">This is an in-app game rank, not an official JEE rank. Completing targets raises your points; missed target days reduce them.</div>
-</section>
-<section class="card hero">
-<h2>🎯 Daily quests</h2>
-<div class="quest"><span class="quest-icon">⏱️</span><div><strong>Complete today's mission</strong><span class="small" id="questMission">Reach your study target.</span></div></div>
-<div class="quest" style="margin-top:9px"><span class="quest-icon">⚡</span><div><strong>Build momentum</strong><span class="small" id="questMomentum">Study for at least 60 minutes today.</span></div></div>
-<div class="quest" style="margin-top:9px"><span class="quest-icon">🛡️</span><div><strong>Recovery quest</strong><span class="small">If you missed yesterday, today's target is your fresh restart.</span></div></div>
-</section>
-<section class="card hero">
-<h2>🔔 Reminder settings</h2>
-<div class="small">Choose how often the app reminds you while it is open.</div>
-<div class="reminder-grid" style="margin-top:12px">
-<div><label>Repeat reminder</label><select id="reminderInterval" onchange="saveReminderSettings()"><option value="15">Every 15 minutes</option><option value="30">Every 30 minutes</option><option value="60">Every 60 minutes</option></select></div>
-<div><label>Reminder threshold</label><select id="reminderThreshold" onchange="saveReminderSettings()"><option value="30">When 30+ min remain</option><option value="60">When 60+ min remain</option><option value="120">When 2+ hours remain</option></select></div>
-</div>
-<button class="btn primary full" style="margin-top:10px" onclick="enableNotifications()">Enable / refresh notifications</button>
-<div class="notice">For scheduled notifications after the app is completely closed, a native Android scheduler or push backend is needed. This version keeps reminding you while the app/page is running.</div>
-</section>
-
-
-<section class="card hero" id="daySetupCard" style="display:none">
-  <h2>🌅 Start your day</h2>
-  <div class="small" id="dateGreeting">Today</div>
-  <div style="font-size:28px;font-weight:900;margin:8px 0" id="liveDateTime">--</div>
-  <div class="small">What kind of day is this?</div>
-  <div class="mode" style="margin-top:12px">
-    <button class="btn primary" onclick="chooseDayType('school')">🏫 School Day</button>
-    <button class="btn" onclick="chooseDayType('holiday')">📚 Holiday</button>
-  </div>
-  <div class="small">You will be asked once when you first open the app each new day.</div>
-</section>
-
-<section class="card hero">
-  <h2>🛡️ Buffer / Exam Mode</h2>
-  <div class="small">Use this during heavy school pressure, tests, exams, or unusually busy weeks. It pauses the normal streak/rank pressure for the selected period.</div>
-  <div class="mode" style="margin-top:12px">
-    <button class="btn" onclick="startBuffer(1)">1 Buffer Day</button>
-    <button class="btn" onclick="startBuffer(7)">1 Buffer Week</button>
-    <button class="btn danger" onclick="clearBuffer()">Cancel Buffer</button>
-  </div>
-  <div class="notice" id="bufferStatus">No buffer active.</div>
-
-<div class="buffer-controls" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-  <button class="btn secondary" onclick="pauseBuffer()">⏸ Pause Buffer</button>
-  <button class="btn secondary" onclick="resumeBuffer()">▶ Resume Buffer</button>
-  <button class="btn danger" onclick="stopBuffer()">⏹ Stop Buffer</button>
-</div>
-<p class="muted">You can pause, resume, or stop an active Buffer Day/Week anytime.</p>
-</section>
-
-<section class="card hero">
-  <h2>📋 Today's sessions</h2>
-  <div id="sessions" class="session-list"></div>
-</section>
-</div>
-<footer>Your progress stays in this browser. Focus Rank is an in-app game mechanic, not an official JEE rank.</footer>
 </div>
 
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div><strong>JEE Focus</strong><span>Consistency Quest</span></div>
+    </div>
+    <div class="top-date"><span id="homeDate"></span><b id="homeTime"></b></div>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">TODAY'S MISSION</p>
+          <h1>Stay consistent. Build momentum.</h1>
+          <p class="muted">Your target adapts to the School Day / Holiday choice you make each day.</p>
+        </div>
+        <div class="streak-pill">🔥 <span id="homeStreak">0</span> day streak</div>
+      </div>
+
+      <div class="home-grid">
+        <article class="card target-card">
+          <div class="card-head"><span>Today's Target</span><span class="status-dot"></span></div>
+          <div class="big-number" id="homeTarget">0h 0m</div>
+          <div class="progress"><div id="homeProgress" class="progress-fill"></div></div>
+          <div class="row"><span id="homeStudied">0m studied</span><b id="homeRemaining">0m left</b></div>
+          <div class="day-choice" id="dayChoice">
+            <button class="choice" onclick="chooseDayType('school')">🏫 School Day<br><b>5h 50m</b></button>
+            <button class="choice" onclick="chooseDayType('holiday')">☀️ Holiday<br><b>11h 20m</b></button>
+          </div>
+        </article>
+
+        <article class="card focus-card">
+          <div class="card-head"><span>Focus Session</span><span>⏱️</span></div>
+          <div class="timer" id="timer">00:00:00</div>
+          <div class="timer-actions">
+            <button class="primary" id="startBtn" onclick="toggleTimer()">▶ Start</button>
+            <button class="secondary" onclick="resetTimer()">↺ Reset</button>
+          </div>
+          <p class="muted center">You can log study in multiple sessions.</p>
+        </article>
+      </div>
+
+      <article class="card log-card">
+        <div class="card-head"><span>Log Study Session</span><span>➕</span></div>
+        <div class="log-form">
+          <input id="manualMinutes" type="number" min="1" placeholder="Minutes studied">
+          <button class="primary" onclick="logManual()">Add Session</button>
+        </div>
+      </article>
+
+      <div class="home-mini-grid">
+        <article class="mini-card"><span>📚</span><b id="homeSessions">0</b><small>Sessions today</small></article>
+        <article class="mini-card"><span>⚡</span><b id="homeXP">0 XP</b><small>Today's progress</small></article>
+        <article class="mini-card"><span>🏆</span><b id="homeRank">#1000</b><small>Focus Rank</small></article>
+        <article class="mini-card"><span>🛡️</span><b id="homeBuffer">Off</b><small>Buffer status</small></article>
+      </div>
+    </section>
+
+    <!-- CONSISTENCY -->
+    <section class="page" id="page-consistency">
+      <div class="page-title"><p class="eyebrow">PROGRESS</p><h1>Streak & Consistency</h1><p class="muted">See your habits, level, XP, rank and weekly consistency in one place.</p></div>
+      <div class="stats-grid">
+        <article class="card stat"><span>🔥 Current Streak</span><strong id="statStreak">0 days</strong><small>Keep the chain going</small></article>
+        <article class="card stat"><span>🏆 Focus Rank</span><strong id="statRank">#1000</strong><small>In-app consistency rank</small></article>
+        <article class="card stat"><span>⚡ Level</span><strong id="statLevel">Starter</strong><small id="statXP">0 XP</small></article>
+        <article class="card stat"><span>🎯 Completion</span><strong id="statCompletion">0%</strong><small>Based on logged target progress</small></article>
+      </div>
+      <article class="card">
+        <div class="card-head"><span>Weekly Consistency</span><span>📅</span></div>
+        <div id="weekView" class="week-view"></div>
+      </article>
+      <article class="card">
+        <div class="card-head"><span>Achievements & Rewards</span><span>🎖️</span></div>
+        <div id="badges" class="badge-grid"></div>
+      </article>
+      <article class="card">
+        <div class="card-head"><span>Recent Sessions</span><span>📝</span></div>
+        <div id="sessionList" class="session-list"></div>
+      </article>
+    </section>
+
+    <!-- BUFFER & REMINDERS -->
+    <section class="page" id="page-buffer">
+      <div class="page-title"><p class="eyebrow">FLEXIBILITY</p><h1>Buffer & Reminders</h1><p class="muted">Use buffer when school or exam pressure genuinely makes the normal target unrealistic.</p></div>
+      <article class="card buffer-main">
+        <div class="card-head"><span>🛡️ Buffer Mode</span><span id="bufferStatusBadge">Off</span></div>
+        <div id="bufferStatus" class="buffer-status">No buffer active.</div>
+        <div class="buffer-buttons">
+          <button class="primary" onclick="startBuffer(1)">Buffer Day</button>
+          <button class="primary" onclick="startBuffer(7)">Buffer Week</button>
+          <button class="secondary" onclick="pauseBuffer()">⏸ Pause</button>
+          <button class="secondary" onclick="resumeBuffer()">▶ Resume</button>
+          <button class="danger" onclick="stopBuffer()">⏹ Stop</button>
+        </div>
+        <p class="muted">Pause freezes the remaining buffer time. Resume continues it later. Stop ends it immediately.</p>
+      </article>
+      <article class="card">
+        <div class="card-head"><span>🔔 Study Reminders</span><span>Settings</span></div>
+        <label class="setting-row"><span><b>Enable reminders</b><small>Reminders work while the app/page is running.</small></span><input id="reminderToggle" type="checkbox" onchange="toggleReminders(this.checked)"></label>
+        <div class="setting-grid">
+          <label>Repeat every<select id="settingsInterval" onchange="saveSettings()"><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option></select></label>
+          <label>Remind when remaining<select id="settingsThreshold" onchange="saveSettings()"><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="120">120 minutes</option></select></label>
+        </div>
+      </article>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" id="page-settings">
+      <div class="page-title"><p class="eyebrow">CUSTOMIZE</p><h1>Settings</h1><p class="muted">Make JEE Focus fit the way you study.</p></div>
+      <article class="card">
+        <div class="card-head"><span>🎨 Appearance</span></div>
+        <p class="muted">Choose how the app looks.</p>
+        <div class="theme-grid">
+          <button class="theme-choice" data-theme-choice="light" onclick="setTheme('light')">☀️<b>Light</b><small>Clean & bright</small></button>
+          <button class="theme-choice" data-theme-choice="dark" onclick="setTheme('dark')">🌙<b>Dark</b><small>Low-light friendly</small></button>
+          <button class="theme-choice" data-theme-choice="system" onclick="setTheme('system')">🖥️<b>System</b><small>Follow device</small></button>
+        </div>
+        <div class="current-theme">Current theme: <b id="themeLabel">System</b></div>
+      </article>
+      <article class="card">
+        <div class="card-head"><span>📅 Daily setup</span></div>
+        <label class="setting-row"><span><b>Default day type</b><small>Controls the first-time setup. After choosing, the app uses that target automatically.</small></span>
+          <select id="defaultDayMode" onchange="saveSettings()"><option value="ask">Ask me each day</option><option value="school">School Day</option><option value="holiday">Holiday</option></select>
+        </label>
+      </article>
+      <article class="card">
+        <div class="card-head"><span>🔔 Notifications</span></div>
+        <p class="muted">For reliable reminders when the app is completely closed, a native Android notification scheduler or push backend is needed.</p>
+        <button class="secondary" onclick="showPage('buffer')">Open Reminder Settings</button>
+      </article>
+      <article class="card danger-zone">
+        <div class="card-head"><span>⚠️ Data</span></div>
+        <p class="muted">This removes all saved sessions, progress, streaks, rank, buffers and settings from this device.</p>
+        <button class="danger" onclick="resetAppData()">Reset All App Data</button>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" onclick="showPage('home')"><span>🏠</span><small>Home</small></button>
+    <button class="nav-item" data-page="consistency" onclick="showPage('consistency')"><span>🔥</span><small>Streak</small></button>
+    <button class="nav-item" data-page="buffer" onclick="showPage('buffer')"><span>🛡️</span><small>Buffer</small></button>
+    <button class="nav-item" data-page="settings" onclick="showPage('settings')"><span>⚙️</span><small>Settings</small></button>
+  </nav>
+</div>
 <script>
 const SCHOOL=5*60+50, HOLIDAY=11*60+20;
 let mode=localStorage.getItem('jee_mode') || 'school';
@@ -295,8 +243,7 @@ function startBuffer(days){
   localStorage.setItem('jee_buffer_state', JSON.stringify(state));
   localStorage.setItem('jee_buffer_until', String(state.endsAt));
   localStorage.setItem('jee_buffer_started', String(state.startedAt));
-  renderBuffer();
-  render();
+
 }
 
 function getBufferState(){
@@ -321,8 +268,7 @@ function pauseBuffer(){
   state.endsAt = null;
   localStorage.setItem('jee_buffer_state', JSON.stringify(state));
   localStorage.removeItem('jee_buffer_until');
-  renderBuffer();
-  render();
+
 }
 
 function resumeBuffer(){
@@ -335,16 +281,14 @@ function resumeBuffer(){
   state.pausedAt = null;
   localStorage.setItem('jee_buffer_state', JSON.stringify(state));
   localStorage.setItem('jee_buffer_until', String(state.endsAt));
-  renderBuffer();
-  render();
+
 }
 
 function stopBuffer(){
   localStorage.removeItem('jee_buffer_state');
   localStorage.removeItem('jee_buffer_until');
   localStorage.removeItem('jee_buffer_started');
-  renderBuffer();
-  render();
+
 }
 
 function renderBuffer(){
@@ -570,6 +514,106 @@ async function installApp(){
   deferredInstall=null; document.getElementById('installBtn').hidden=true;
 }
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
-</script>
-</body>
-</html>
+
+
+/* ===== First-time study-day setup ===== */
+function completeFirstSetup(mode){
+  localStorage.setItem('jee_first_setup_done','1');
+  localStorage.setItem('jee_default_day_mode',mode);
+  // Keep today's target explicitly aligned with the chosen setup.
+  if(typeof chooseDayType === 'function') chooseDayType(mode);
+  const overlay=document.getElementById('firstSetupOverlay');
+  if(overlay){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); }
+  if(typeof showPage==='function') showPage('home');
+  if(typeof render==='function') render();
+  updateFirstSetupUI();
+}
+
+function updateFirstSetupUI(){
+  const done=localStorage.getItem('jee_first_setup_done')==='1';
+  const choice=document.getElementById('dayChoice');
+  if(choice) choice.style.display=done?'none':'flex';
+}
+
+function showFirstSetupIfNeeded(){
+  const done=localStorage.getItem('jee_first_setup_done')==='1';
+  const overlay=document.getElementById('firstSetupOverlay');
+  if(!done && overlay){
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+  }
+}
+
+/* ===== V8 navigation, theme and settings ===== */
+function applyTheme(){
+  const theme = localStorage.getItem('jee_theme') || 'system';
+  document.documentElement.dataset.theme = theme;
+  const label = document.getElementById('themeLabel');
+  if(label) label.textContent = theme.charAt(0).toUpperCase()+theme.slice(1);
+}
+function setTheme(t){
+  localStorage.setItem('jee_theme', t);
+  applyTheme();
+}
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+name);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active', b.dataset.page===name));
+  localStorage.setItem('jee_current_page', name);
+  if(typeof render==='function') render();
+  if(typeof renderBuffer==='function') renderBuffer();
+  updateHomeClock();
+  updateSettingsUI();
+}
+function updateHomeClock(){
+  const d=new Date();
+  const dateEl=document.getElementById('homeDate');
+  const timeEl=document.getElementById('homeTime');
+  if(dateEl) dateEl.textContent=d.toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  if(timeEl) timeEl.textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
+function updateSettingsUI(){
+  const t=localStorage.getItem('jee_theme')||'system';
+  document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('selected',b.dataset.themeChoice===t));
+  const dm=document.getElementById('defaultDayMode');
+  if(dm) dm.value=localStorage.getItem('jee_default_day_mode')||'ask';
+  const r=document.getElementById('reminderToggle');
+  if(r) r.checked=!!window.notificationEnabled;
+}
+function saveSettings(){
+  const mode=document.getElementById('defaultDayMode');
+  if(mode) localStorage.setItem('jee_default_day_mode',mode.value);
+  const intv=document.getElementById('settingsInterval');
+  if(intv){
+    localStorage.setItem('jee_reminder_interval',intv.value);
+    window.reminderInterval=Number(intv.value);
+  }
+  const th=document.getElementById('settingsThreshold');
+  if(th){
+    localStorage.setItem('jee_reminder_threshold',th.value);
+    window.reminderThreshold=Number(th.value);
+  }
+}
+function toggleReminders(v){
+  window.notificationEnabled=!!v;
+  localStorage.setItem('jee_notifications', v?'1':'0');
+  if(typeof requestNotificationPermission==='function' && v) requestNotificationPermission();
+  updateSettingsUI();
+}
+function resetAppData(){
+  if(confirm('Reset all JEE Focus progress, streaks, sessions, rank and settings?')){
+    localStorage.clear();
+    location.reload();
+  }
+}
+window.addEventListener('load',()=>{
+  applyTheme();
+  const p=localStorage.getItem('jee_current_page')||'home';
+  showPage(p);
+  updateHomeClock();
+  setInterval(updateHomeClock,1000);
+  showFirstSetupIfNeeded();
+  updateFirstSetupUI();
+});
+</script></html>
